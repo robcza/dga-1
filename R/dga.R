@@ -30,6 +30,7 @@ dgaPredictDomain <- function(dns, dgaThreshold=0.5) {
   outs <- predict(rfFit, newdata=pdomain, type="prob")
   if(pdomain$length < 9) {
     outs$dga <- 0
+    outs$legit <- 1
   }
   data.frame(name=pdomain$name, class=ifelse(outs$dga>=dgaThreshold, "dga", "legit"),
             prob=ifelse(outs$dga>=dgaThreshold, outs$dga, outs$legit))
